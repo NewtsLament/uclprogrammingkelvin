@@ -1,0 +1,43 @@
+Programming uge34
+
+Opgave 0
+	- Hvordan den streng som bestemmer path til controller, fungerer.
+		- Regex?
+	- Hvorfor den kringelede vej til nyt projekt, i stedet for "create new project"?
+	- Under Daniels forberedelse forsvandt muligheden for at tilføje c# klasser.
+	
+Opgave 1
+· Get started
+	Nyt projekt ASP.NET MVC
+
+· Add a controller
+	MOviewhatever controller i controller mappen (navngivning navn + "Controller")
+
+· Add a view
+	Hver controller har en gruppe views, struktureret i følgende mappestruktur "./Views/NavnController/About.cshtml"
+	Views skrive i Razor markup.
+	Kan post og gette osv til controllere, der er nogle dybere regler for det som jeg ikke har styr på.
+
+· Add a model
+	I modellerne foregår businesslogic og lagring af stamdata.
+
+· Work with a database (se seedfil nederst)
+	Databasen kan skabes med værktøjer hentet gennem nuget, ud fra de modeller som er skrevet.
+	Ekstra attributes kan styre de forskellige kolonner i databasen, f.x. styre decimals størrelse og komma placering.
+
+· Controller actions and views
+	En controller akction returnere et view, til browseren(?).
+	Den kan tage fat i modellerne og hente data/bede om beregninger osv.
+	Views kan poste og gette osv. til controllere.
+
+· Add search
+	Dunno.
+
+· Add a new field
+	EZPZ.
+
+· Add validation
+	EZPZ.
+
+· Examine Details and Delete 
+	No!
