@@ -28,5 +28,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+SeedData.Initialize(app.Services.CreateScope().ServiceProvider);
 app.Run();

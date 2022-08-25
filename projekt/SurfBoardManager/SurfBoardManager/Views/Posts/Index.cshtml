@@ -9,39 +9,48 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Equipment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Board)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Equipment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Board.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div class="container d-flex flex-wrap">
+
+    @foreach (var item in Model)
+    {
+        <div class="card float-start m-1" style="width:18rem">
+            <img src="images/klef.png" class="card-img-top img-thumbnail img-fluid" width="100">
+            <div class="card-body">
+                <div class="">
+                <h5 class="card-title">Post @item.Id</h5>
+                    <div class="m-1">
+                        <div class="text-decoration-underline">
+                            @Html.DisplayNameFor(model => model.Price)
+                        </div>
+                        <div>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </div>
+                    </div>
+                    <div class="m-1">
+                        <div class="text-decoration-underline">
+                            @Html.DisplayNameFor(model => model.Equipment)
+                        </div>
+                        <div>
+                            @Html.DisplayFor(modelItem => item.Equipment)
+                        </div>
+                    </div>
+                    <div class="m-1">
+                        <div class="text-decoration-underline">
+                            @Html.DisplayNameFor(model => model.Board)
+                        </div>
+                        <div>
+                            @Html.DisplayFor(modelItem => item.Board.Name)
+                        </div>
+                    </div>
+                    </div>
+                <div id="spacer" style="width: 10vw; height: 3vh; margin-right:0px;"></div>
+                <div class="btn-group m-2 position-absolute bottom-0">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
