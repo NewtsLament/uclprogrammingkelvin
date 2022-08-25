@@ -17,9 +17,5 @@ namespace SurfBoardManager.Data
         public DbSet<SurfBoardManager.Models.Board> Board { get; set; } = default!;
 
         public DbSet<SurfBoardManager.Models.Post>? Post { get; set; }
-
-        public DbSet<SurfBoardManager.Models.BoardType>? BoardType { get; set; }
-
-        public DbSet<SurfBoardManager.Models.Equipment>? Equipment { get; set; }
     }
 }

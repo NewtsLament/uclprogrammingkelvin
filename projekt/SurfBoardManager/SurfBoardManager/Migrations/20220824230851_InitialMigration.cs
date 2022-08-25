@@ -4,7 +4,7 @@
 
 namespace SurfBoardManager.Migrations
 {
-    public partial class initial : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,7 +19,7 @@ namespace SurfBoardManager.Migrations
                     Length = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Thickness = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Volume = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    BoardType = table.Column<int>(type: "INT", nullable: false)
+                    BoardType = table.Column<int>(type: "INT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -33,8 +33,8 @@ namespace SurfBoardManager.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Equipment = table.Column<int>(type: "INT", nullable: false),
-                    BoardId = table.Column<int>(type: "int", nullable: false)
+                    Equipment = table.Column<string>(type: "NVarChar(255)", nullable: false),
+                    BoardId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -43,8 +43,7 @@ namespace SurfBoardManager.Migrations
                         name: "FK_Post_Board_BoardId",
                         column: x => x.BoardId,
                         principalTable: "Board",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

@@ -22,14 +22,15 @@ namespace SurfBoardManager.Controllers
         // GET: Posts
         public async Task<IActionResult> Index()
         {
-              return _context.Post != null ? 
-                          View(await _context.Post.ToListAsync()) :
+            return _context.Post != null ?
+                          View(await _context.Post.Include("Board").ToListAsync()) :
                           Problem("Entity set 'SurfBoardManagerContext.Post'  is null.");
         }
 
         // GET: Posts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            ViewBag.Boards = _context.Board != null ? await _context.Board.ToListAsync() : new List<Board>();
             if (id == null || _context.Post == null)
             {
                 return NotFound();
@@ -46,9 +47,12 @@ namespace SurfBoardManager.Controllers
         }
 
         // GET: Posts/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            PostBoardsViewModel postBoardsViewModel = new PostBoardsViewModel();
+            postBoardsViewModel.Boards = _context.Board != null ? await _context.Board.ToListAsync() : new List<Board>();
+            postBoardsViewModel.Post = new Post();
+            return View(postBoardsViewModel);
         }
 
         // POST: Posts/Create
@@ -56,15 +60,18 @@ namespace SurfBoardManager.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Price")] Post post)
+        public async Task<IActionResult> Create([Bind("Post,ChosenBoardId")] PostBoardsViewModel postBoardsViewModel)
         {
+            postBoardsViewModel.Post.Board = await _context.Board
+                .FirstOrDefaultAsync(m => m.Id == postBoardsViewModel.ChosenBoardId);
+            ModelState.Remove("Boards");
             if (ModelState.IsValid)
             {
-                _context.Add(post);
+                _context.Add(postBoardsViewModel.Post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(post);
+            return View(postBoardsViewModel);
         }
 
         // GET: Posts/Edit/5
@@ -80,7 +87,14 @@ namespace SurfBoardManager.Controllers
             {
                 return NotFound();
             }
-            return View(post);
+
+            PostBoardsViewModel postBoardsViewModel = new PostBoardsViewModel();
+
+            postBoardsViewModel.Post = post;
+            postBoardsViewModel.Boards = _context.Board != null ? await _context.Board.ToListAsync() : new List<Board>();
+            postBoardsViewModel.ChosenBoardId = 0;
+
+            return View(postBoardsViewModel);
         }
 
         // POST: Posts/Edit/5
@@ -88,23 +102,25 @@ namespace SurfBoardManager.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Price")] Post post)
+        public async Task<IActionResult> Edit(int id, [Bind("Post, ChosenBoardId")] PostBoardsViewModel postBoardsViewModel)
         {
-            if (id != post.Id)
+            postBoardsViewModel.Post.Board = await _context.Board
+                .FirstOrDefaultAsync(m => m.Id == postBoardsViewModel.ChosenBoardId);
+            if (id != postBoardsViewModel.Post.Id)
             {
                 return NotFound();
             }
-
+            ModelState.Remove("Boards");
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(post);
+                    _context.Update(postBoardsViewModel.Post);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PostExists(post.Id))
+                    if (!PostExists(postBoardsViewModel.Post.Id))
                     {
                         return NotFound();
                     }
@@ -115,7 +131,8 @@ namespace SurfBoardManager.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(post);
+            postBoardsViewModel.Boards = _context.Board != null ? await _context.Board.ToListAsync() : new List<Board>();
+            return View(postBoardsViewModel);
         }
 
         // GET: Posts/Delete/5
