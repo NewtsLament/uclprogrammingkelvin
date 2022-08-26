@@ -15,11 +15,10 @@
     @foreach (var item in Model)
     {
         <div class="card float-start m-1" style="width:18rem">
-            <img src="images/klef.png" class="card-img-top img-thumbnail img-fluid" width="100">
-            <div class="card-body">
-                <div class="">
+            <div class="card-body mb-4 d-flex flex-column flex-wrap align-items-center">
+
                 <h5 class="card-title">Post @item.Id</h5>
-                    <div class="m-1">
+                <div class="m-1 align-self-baseline">
                         <div class="text-decoration-underline">
                             @Html.DisplayNameFor(model => model.Price)
                         </div>
@@ -27,7 +26,7 @@
                             @Html.DisplayFor(modelItem => item.Price)
                         </div>
                     </div>
-                    <div class="m-1">
+                <div class="m-1 align-self-baseline">
                         <div class="text-decoration-underline">
                             @Html.DisplayNameFor(model => model.Equipment)
                         </div>
@@ -35,15 +34,15 @@
                             @Html.DisplayFor(modelItem => item.Equipment)
                         </div>
                     </div>
-                    <div class="m-1">
+                <div class="m-1 align-self-baseline">
                         <div class="text-decoration-underline">
                             @Html.DisplayNameFor(model => model.Board)
                         </div>
                         <div>
-                            @Html.DisplayFor(modelItem => item.Board.Name)
+                            @Html.DisplayFor(modelItem => item.Board!.Name)
                         </div>
                     </div>
-                    </div>
+                
                 <div id="spacer" style="width: 10vw; height: 3vh; margin-right:0px;"></div>
                 <div class="btn-group m-2 position-absolute bottom-0">
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>

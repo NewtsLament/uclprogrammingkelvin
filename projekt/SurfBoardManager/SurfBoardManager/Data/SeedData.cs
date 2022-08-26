@@ -22,29 +22,29 @@ namespace SurfBoardManager.Data
                     context.Board.AddRange(
                         new Board
                         {
-                            Name = "Plormt",
-                            Width = 5.55,
-                            Length = 2.98,
-                            Thickness = 3.41,
-                            Volume = 23.1,
+                            Name = "The Minilog",
+                            Width = 21,
+                            Length = 6,
+                            Thickness = 2.75,
+                            Volume = 38.8,
+                            BoardType = Board.Type.Shortboard
+                        },
+                        new Board
+                        {
+                            Name = "The Wide Glider",
+                            Width = 21.75,
+                            Length = 7.1,
+                            Thickness = 2.75,
+                            Volume = 44.16,
                             BoardType = Board.Type.Funboard
                         },
                         new Board
                         {
-                            Name = "Happy board",
-                            Width = 5.23,
-                            Length = 1.83,
-                            Thickness = 3.14,
-                            Volume = 3.1,
-                            BoardType = Board.Type.Funboard
-                        },
-                        new Board
-                        {
-                            Name = "Concrete funtime",
-                            Width = 9.2,
-                            Length = 5.56,
-                            Thickness = 0.41,
-                            Volume = 12.5,
+                            Name = "The Golden Ratio",
+                            Width = 21.85,
+                            Length = 6.3,
+                            Thickness = 2.9,
+                            Volume = 43.22,
                             BoardType = Board.Type.Shortboard
                         },
                         new Board
